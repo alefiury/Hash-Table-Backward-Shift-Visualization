@@ -21,9 +21,11 @@ LANGUAGES = {
         'empty_slot': "```ht[{}] = None``` - Empty the slot at index {}",
         'checking_move': "Checking if element at index {} needs to move",
         'while_loop': "```while ht[{}] is not None and {} != {}:``` - Check next slot j={}",
-        'no_move_needed': "Element at index {} does not need to move",
+        'no_move_needed': "Element at index {} need to move",
         'moving_element': "Moving element from index {} to index {}",
-        'moved_element': "Moved element {} from index {} to index {}"
+        'moved_element': "Moved element {} from index {} to index {}",
+        'reference_code': "Reference Implementation",
+        'pseudo_code': "Original Pseudo Code",
     },
     'Portuguese (BR)': {
         'title': "Visualização de Supressão de Lacunas",
@@ -47,8 +49,10 @@ LANGUAGES = {
         'empty_slot': "```ht[{}] = None``` - Esvaziar o espaço no índice {}",
         'checking_move': "Verificando se o elemento no índice {} precisa ser movido",
         'while_loop': "```while ht[{}] is not None and {} != {}:``` - Verificar próximo espaço j={}",
-        'no_move_needed': "Elemento no índice {} não precisa ser movido",
+        'no_move_needed': "Elemento no índice {} precisa ser movido",
         'moving_element': "Movendo elemento do índice {} para o índice {}",
-        'moved_element': "Elemento movido {} do índice {} para o índice {}"
+        'moved_element': "Elemento movido {} do índice {} para o índice {}",
+        'reference_code': "Implementação de Referência",
+        'pseudo_code': "Pseudo Código Original",
     },
 }

@@ -113,5 +113,60 @@ def main():
             st.experimental_rerun()
 
 
+    # Add reference implementation at the end of the page
+    st.markdown("---")
+    st.subheader(get_text("reference_code"))
+    st.code("""
+            def remove(ht, D, i):
+                j = i
+                ht[j] = None
+                j = (j + 1) % D
+
+                while ht[j] is not None and j != i:
+                    r = hash(ht[j]) % D
+
+                    if not (((i < r) and (r <= j)) or
+                            ((j < i) and (i < r)) or
+                            ((r <= j) and (j < i))):
+                        break
+
+                    j = (j + 1) % D
+
+                if j != i and ht[j] is not None:
+                    ht[i] = ht[j]
+                    ht[j] = None
+                    print(ht)
+                    remove(ht, D, j)
+                """,
+        language="python"
+    )
+
+    st.markdown("---")
+    st.subheader(get_text("pseudo_code"))
+    st.code("""
+            void remove(int i) {
+                int j = i;
+                empty[j] = true;
+                j = (j + 1) % D;
+                while (!empty[j] && (j != i)) {
+                    int r = Hash(ht[j]);
+
+                    if (!((i < r && r <= j) ||
+                        (j < i && i < r) ||
+                        (r <= j && j < i))) {
+                        break;
+                    }
+                    j = (j + 1) % D;
+                }
+                if (j != i && !empty[j]) {
+                    ht[i] = ht[j];
+                    remove(j);
+                }
+            }
+        """,
+        language="c"
+    )
+
+
 if __name__ == "__main__":
     main()
