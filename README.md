@@ -18,7 +18,11 @@ streamlit run src/main.py
 
 ## Running the Application via Google Colab
 
-You can also run the application through Google Colab. Access at [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/alefiury/Hash-Table-Backward-Shift-Visualization/blob/main/colab/Hash_Table_Backward_Shift_Visualization_Example.ipynb)
+For users who prefer not to set up their environment locally, the application can also be run through Google Colab. Click on the following badge to access the Colab notebook:
+
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/alefiury/Hash-Table-Backward-Shift-Visualization/blob/main/colab/Hash_Table_Backward_Shift_Visualization_Example.ipynb).
+
+After executing all the cells in the notebook, open the link provided by the last cell. Then, copy the IP address displayed in the last cell and paste it into the 'Tunnel Password:' prompt.
 
 ## Author
 
