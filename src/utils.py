@@ -1,5 +1,4 @@
 import copy
-import asyncio
 from typing import List, Dict, Any
 
 import streamlit as st
@@ -162,27 +161,6 @@ def step_through(ht: List[int], D: int, i: int) -> List[Dict[str, Any]]:
         steps.extend(step_through(ht, D, j))
 
     return steps
-
-
-async def auto_step(steps: List[Dict[str, Any]], delay: float) -> None:
-    """
-    Automatically step through the process of removing an element from the hash table.
-
-    Args:
-
-    steps (List[Dict[str, Any]]): A list of steps in the process.
-    delay (float): The delay between steps.
-
-    Returns:
-
-    None
-    """
-    for i in range(len(steps)):
-        if st.session_state.paused:
-            break
-        st.session_state.current_step = i
-        st.experimental_rerun()
-        await asyncio.sleep(delay)
 
 
 def display_current_step() -> None:

@@ -1,5 +1,5 @@
+import time
 import copy
-import asyncio
 
 import streamlit as st
 
@@ -8,8 +8,7 @@ from utils import (
     get_text,
     find_index,
     step_through,
-    display_current_step,
-    auto_step
+    display_current_step
 )
 
 
@@ -28,7 +27,8 @@ def main():
         st.session_state.size = 10
         st.session_state.steps = []
         st.session_state.current_step = 0
-        st.session_state.paused = True
+        st.session_state.auto_play = False
+        st.session_state.delay = 1.0
 
     col1, col2 = st.columns([1, 2])
 
@@ -77,33 +77,38 @@ def main():
             with col1:
                 if st.button(get_text("previous_step")) and st.session_state.current_step > 0:
                     st.session_state.current_step -= 1
-                    st.session_state.paused = True
+                    st.session_state.auto_play = False
             with col2:
                 if st.button(get_text("next_step")) and st.session_state.current_step < len(st.session_state.steps) - 1:
                     st.session_state.current_step += 1
-                    st.session_state.paused = True
+                    st.session_state.auto_play = False
             with col3:
                 if st.button(get_text("reset_to_start")):
                     st.session_state.current_step = 0
-                    st.session_state.paused = True
+                    st.session_state.auto_play = False
             with col4:
                 if st.button(get_text("jump_to_end")):
                     st.session_state.current_step = len(st.session_state.steps) - 1
-                    st.session_state.paused = True
+                    st.session_state.auto_play = False
             with col5:
-                if st.session_state.paused:
+                if not st.session_state.auto_play:
                     if st.button(get_text("auto_play")):
-                        st.session_state.paused = False
+                        st.session_state.auto_play = True
                 else:
                     if st.button(get_text("pause")):
-                        st.session_state.paused = True
+                        st.session_state.auto_play = False
 
-            delay = st.slider(get_text("delay_slider"), 0.1, 5.0, 1.0, 0.1)
+            st.session_state.delay = st.slider(get_text("delay_slider"), 0.1, 5.0, 1.0, 0.1)
 
-            if not st.session_state.paused:
-                asyncio.run(auto_step(st.session_state.steps, delay))
+            display_current_step()
 
-        display_current_step()
+            if st.session_state.auto_play and st.session_state.current_step < len(st.session_state.steps) - 1:
+                st.session_state.current_step += 1
+                time.sleep(st.session_state.delay)
+                st.experimental_rerun()
+            elif st.session_state.auto_play and st.session_state.current_step == len(st.session_state.steps) - 1:
+                st.session_state.auto_play = False
+
 
         if st.session_state.steps and st.button(get_text("apply_changes")):
             st.session_state.ht = st.session_state.steps[-1]["ht"]
@@ -111,7 +116,6 @@ def main():
             st.session_state.current_step = 0
             st.success(get_text("changes_applied"))
             st.experimental_rerun()
-
 
     # Add reference implementation at the end of the page
     st.markdown("---")
